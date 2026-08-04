@@ -1,0 +1,10 @@
+[project]
+name = "hyperion-starter"
+version = "0.1.0"
+description = "An agentic microservice for the HyperAI IDE"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn>=0.34",
+]
