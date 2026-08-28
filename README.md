@@ -75,6 +75,28 @@ data: [DONE]
 
 Note that each `response` chunk is an **increment**, not the accumulated text — send only the new part. The final `data: [DONE]` is optional but recommended.
 
+## Helper function
+
+`read_file`
+
+This function reads a file from the `ide-backend`. It takes the path as its
+argument and returns the contents of the file, or raises `ReadFileError`. Use it
+when you need to read a file and give its contents to the agent.
+
+```python
+from helpers import read_file
+
+content = await read_file("app.yaml")           # just the name - the backend finds it
+content = await read_file("demo/sub/app.yaml")  # or the full path
+```
+
+> **Note**
+>
+> The address comes from `IDE_BACKEND_URL`. Running locally it is
+> `http://localhost:3001/api`; when you run the agent as a Docker container it
+> has to be `http://host.docker.internal:3001/api`. Both are already set in the
+> code, so you do not have to do anything else.
+
 ## Add your agentic code
 
 You can use your favourite framework. We recommend:
