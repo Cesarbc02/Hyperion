@@ -1,10 +1,22 @@
-import asyncio
 import json
+import os
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
+
+LITELLM_BASE_URL = "https://legion1.di.uoa.gr/v1"
+LITELLM_API_KEY = ""  # ask it from the HyperAI Team
+MODEL = "llama3.2:latest"
+
+llm = ChatOpenAI(
+    model=MODEL,
+    base_url=LITELLM_BASE_URL,
+    api_key=LITELLM_API_KEY,
+    max_tokens=4096,
+)
 
 app = FastAPI(title="Hyperion Agent")
 
@@ -22,11 +34,9 @@ class ChatRequest(BaseModel):
 
 
 async def generate_reply(request: ChatRequest):
-    # TODO: Implement a real chat model here
-    reply = f"Hyperion echo for {request.user_id[:8]}: {request.text}"
-    for word in reply.split(" "):
-        yield f"data: {json.dumps({'response': word + ' '})}\n\n"
-        await asyncio.sleep(0.05)
+    async for chunk in llm.astream(request.text):
+        if chunk.text:
+            yield f"data: {json.dumps({'response': chunk.text})}\n\n"
     yield "data: [DONE]\n\n"
 
 

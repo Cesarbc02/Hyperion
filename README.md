@@ -1,6 +1,6 @@
 # hyperion-starter
 
-A starter implementation of **Hyperion**, the agentic assistant for the [HyperAI IDE](https://ide.hyperai.di.uoa.gr/), written in Python. It is a minimal [FastAPI](https://fastapi.tiangolo.com/) server that listens on **port 8000**, exposes a `POST /chat` endpoint, and streams its reply back to the IDE as [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). Out of the box it simply echoes what you type — your job is to replace the echo with a real agent.
+A starter implementation of **Hyperion**, the agentic assistant for the [HyperAI IDE](https://ide.hyperai.di.uoa.gr/), written in Python. It is a minimal [FastAPI](https://fastapi.tiangolo.com/) server that listens on **port 8000**, exposes a `POST /chat` endpoint, and streams its reply back to the IDE as [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events). Out of the box it forwards your prompt to a `llama3.2` model and streams the answer back — your job is to turn that into a real agent.
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ Have the HyperAI IDE running locally (each command runs in the foreground — us
    docker compose up --build
    ```
 
-3. In the IDE, open **Hyperion** from the sidebar (the robot icon), type something, and watch the echo stream back word by word.
+3. In the IDE, open **Hyperion** from the sidebar (the robot icon), type something, and watch the answer stream back token by token.
 
 You can also test the endpoint without the IDE:
 
