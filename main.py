@@ -1,20 +1,23 @@
 import json
 import os
 
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel
 
-LITELLM_BASE_URL = "https://legion1.di.uoa.gr/v1"
-LITELLM_API_KEY = ""  # ask it from the HyperAI Team
+load_dotenv()
+
+API_KEY = os.environ.get("API_KEY", "")
+BASE_URL = "https://legion1.di.uoa.gr/v1"
 MODEL = "llama3.2:latest"
 
 llm = ChatOpenAI(
     model=MODEL,
-    base_url=LITELLM_BASE_URL,
-    api_key=LITELLM_API_KEY,
+    base_url=BASE_URL,
+    api_key=API_KEY,
     max_tokens=4096,
 )
 
