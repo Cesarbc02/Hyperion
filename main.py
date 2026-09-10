@@ -12,7 +12,7 @@ load_dotenv()
 
 API_KEY = os.environ.get("API_KEY", "")
 BASE_URL = "https://legion1.di.uoa.gr/v1"
-MODEL = "llama3.2:latest"
+MODEL = "llama3.1"
 
 llm = ChatOpenAI(
     model=MODEL,
