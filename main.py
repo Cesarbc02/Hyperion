@@ -18,7 +18,7 @@ llm = ChatOpenAI(
     model=MODEL,
     base_url=BASE_URL,
     api_key=API_KEY,
-    max_tokens=4096,
+    max_completion_tokens=2048,
 )
 
 app = FastAPI(title="Hyperion Agent")
