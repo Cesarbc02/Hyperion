@@ -13,5 +13,14 @@ dependencies = [
     "python-docx>=1.2.0",
     "python-dotenv>=1.2.3",
     "sentence-transformers>=6.1.0",
+    "torch==2.14.1+cpu",
     "uvicorn>=0.34",
 ]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
